@@ -1,1 +1,18 @@
+# --- Credenciales y Archivos de Configuración Sensibles ---
+# Evita que se suban las contraseñas de base de datos o configuraciones locales de entorno
 SafePay-InfinityFree/SafePay-ORIGINS/config/db.php
+
+# --- Archivos del Sistema Operativo ---
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# --- Directorio de Subidas (Uploads) ---
+# Ignora el contenido subido por los usuarios (fotos, facturas, PDFs), pero conserva la carpeta y su .htaccess
+SafePay-InfinityFree/SafePay-ORIGINS/uploads/*
+!SafePay-InfinityFree/SafePay-ORIGINS/uploads/.htaccess
+
+# --- Caché y Temporales ---
+*.log
+.tmp
