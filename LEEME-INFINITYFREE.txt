@@ -1,0 +1,128 @@
+SafePay - paquete para InfinityFree
+====================================
+
+Contenido
+---------
+- htdocs/                 Contenido que se sube a la carpeta htdocs de InfinityFree.
+- instalacion/            SQL de instalación y datos de demostración.
+- LEEME-INFINITYFREE.txt  Este archivo. No se sube al hosting.
+
+No se incluyó README.md ni la carpeta docs/.
+
+
+1. Crear la base de datos
+-------------------------
+1. En el panel de InfinityFree, abra "MySQL Databases".
+2. Cree una base de datos. Anote:
+   - Host (por ejemplo sqlXXX.infinityfree.com)
+   - Nombre completo de la base (por ejemplo if0_XXXXXXXX_safepay)
+   - Usuario (por ejemplo if0_XXXXXXXX)
+   - Contraseña
+3. No es necesario crear las tablas a mano: se importan en el paso 3.
+
+
+2. Configurar la conexión
+-------------------------
+Edite htdocs/config/db.php y reemplace los valores de ejemplo:
+
+   $host       = 'sqlXXX.infinityfree.com';
+   $puerto     = 3306;
+   $basedatos  = 'if0_XXXXXXXX_safepay';
+   $usuario    = 'if0_XXXXXXXX';
+   $contrasena = 'LA_CLAVE_QUE_DEFINIO';
+
+No suba las credenciales locales de XAMPP.
+
+
+3. Importar la base de datos
+----------------------------
+En phpMyAdmin de InfinityFree:
+
+1. Seleccione la base de datos creada (no "information_schema").
+2. Pestaña "Importar".
+3. Importe primero:
+   instalacion/schema-infinityfree.sql
+4. Importe después:
+   instalacion/seed-infinityfree.sql
+
+Los dos archivos ya están adaptados:
+- No tienen CREATE DATABASE ni USE.
+- No tienen triggers.
+- No tienen claves foráneas.
+
+El esquema usa InnoDB. Si el import falla con "Unknown storage engine 'InnoDB'",
+la cuenta no permite ese motor y este paquete no funcionará en esa cuenta.
+
+
+4. Subir el proyecto
+--------------------
+1. Abra el administrador de archivos de InfinityFree.
+2. Entre en la carpeta htdocs.
+3. Suba TODO el contenido de la carpeta htdocs/ de este paquete:
+   - .htaccess
+   - assets/
+   - auth/
+   - config/
+   - includes/
+   - modules/
+   - services/
+   - uploads/
+   - dashboard.php
+   - index.php
+
+No suba:
+- LEEME-INFINITYFREE.txt
+- instalacion/
+- docs/
+- README.md
+
+Si sube el proyecto dentro de una subcarpeta, cambie BASE_URL en
+htdocs/config/config.php por el nombre de esa subcarpeta.
+
+
+5. Comprobar después de subir
+-----------------------------
+1. Abra el dominio. Debe cargar la página de inicio.
+2. Inicie sesión con una cuenta demo.
+3. Verifique:
+   - Dashboard.
+   - Proveedores.
+   - Facturas y carga de un PDF.
+   - Pagos.
+   - Alertas.
+   - Auditoría.
+   - Reportes.
+   - Usuarios.
+4. Confirme que uploads/ tenga permisos de escritura. Si la carga de PDF falla,
+   ajuste permisos de la carpeta uploads/ desde el panel (normalmente 755 o 775).
+
+
+Credenciales demo
+-----------------
+admin@safepay.local       / Admin123!
+financiero@safepay.local  / Financiero123!
+empleado@safepay.local    / Empleado123!
+
+No suba este archivo al hosting. Cambie estas claves si el sitio será público.
+
+
+Limitaciones de esta variante
+-----------------------------
+- No hay triggers: la auditoría se registra desde PHP, pero la base de datos ya no
+  impide UPDATE o DELETE directos sobre la tabla auditoria.
+- No hay claves foráneas: la integridad referencial depende del código PHP.
+- Estas limitaciones son una consecuencia del hosting gratuito. Si necesita la
+  auditoría inmutable a nivel de base de datos, use un hosting con triggers.
+
+
+Solución rápida de problemas
+----------------------------
+- Error de conexión: revise host, puerto, nombre de base, usuario y clave en
+  config/db.php.
+- Error 500 al abrir el sitio: pruebe a renombrar .htaccess temporalmente. Si el
+  sitio vuelve, alguna directiva no está permitida en la cuenta; quite la directiva
+  problemática (por ejemplo Options o Header).
+- Enlaces que apuntan a /safepay: BASE_URL no está vacío en config/config.php.
+- "Unknown storage engine 'InnoDB'": la cuenta no soporta InnoDB.
+- No aparecen usuarios: el seed no se importó o se importó en otra base.
+- Error al subir PDF: uploads/ no existe o no es escribible.

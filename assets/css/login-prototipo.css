@@ -1,0 +1,87 @@
+/* SafePay: apariencia del login basada en prototipo/login.php */
+.sp-auth-login-card {
+    border: 1px solid #dce3eb;
+    border-radius: 12px;
+    background: #fff;
+}
+.sp-auth-login-panel {
+    min-height: 590px;
+    color: #fff;
+    background: linear-gradient(135deg, #1d5c96 0%, #08243f 100%);
+}
+.sp-auth-brand {
+    color: #fff;
+    text-decoration: none;
+}
+.sp-auth-brand:hover { color: #fff; opacity: .92; }
+.sp-auth-lead { color: rgba(255,255,255,.78); line-height: 1.65; }
+.sp-auth-checks { color: rgba(255,255,255,.9); font-size: .92rem; }
+.sp-auth-checks > div { display:flex; align-items:flex-start; gap:.55rem; }
+.sp-auth-checks i { color:#7dd3a8; margin-top:.15rem; }
+.sp-auth-foot {
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:.5rem;
+    color:rgba(255,255,255,.68);
+}
+.sp-auth-foot span { color:rgba(255,255,255,.88); }
+.sp-auth-form-panel { min-height:590px; }
+.sp-auth-form-panel h2 { color:#172b40; font-weight:650; }
+.sp-auth-form-kicker {
+    color:#1d5c96;
+    font-size:.78rem;
+    font-weight:700;
+    letter-spacing:.04em;
+}
+.sp-auth-input .input-group-text {
+    background:#f8fafc;
+    color:#526579;
+    border-color:#ced7e2;
+}
+.sp-auth-input .form-control {
+    min-height:48px;
+    border-color:#ced7e2;
+}
+.sp-auth-input .form-control:focus {
+    border-color:#5b9bd5;
+    box-shadow:0 0 0 .2rem rgba(29,92,150,.14);
+}
+.sp-auth-input .btn { border-color:#ced7e2; }
+.sp-auth-submit {
+    min-height:46px;
+    background:#174e7d;
+    border-color:#174e7d;
+    font-weight:600;
+}
+.sp-auth-submit:hover { background:#103d64; border-color:#103d64; }
+.sp-auth-security {
+    display:flex;
+    align-items:flex-start;
+    gap:.75rem;
+    padding:.9rem;
+    border:1px solid #e2e8f0;
+    border-radius:8px;
+    background:#f8fafc;
+    color:#174e7d;
+}
+.sp-auth-security > i { font-size:1.15rem; }
+.sp-auth-security strong { display:block; font-size:.85rem; margin-bottom:.2rem; }
+.sp-auth-security p, .sp-auth-security small {
+    display:block;
+    margin:0;
+    color:#64748b;
+    font-size:.75rem;
+    line-height:1.5;
+}
+.sp-auth-security small { margin-top:.35rem; }
+.sp-auth-mobile-brand { display:none !important; }
+@media (max-width: 991.98px) {
+    .sp-auth-login-panel { min-height: auto; border-radius: 0; }
+    .sp-auth-form-panel { min-height: auto; }
+}
+@media (max-width: 575.98px) {
+    .sp-auth-login-panel { padding:1.5rem !important; }
+    .sp-auth-foot { flex-direction:column; }
+    .sp-auth-form-panel { padding:1.5rem !important; }
+}

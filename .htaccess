@@ -1,0 +1,32 @@
+# Endurecimiento general del proyecto SafePay.
+# XAMPP permite AllowOverride All en htdocs; si se despliega en otro
+# servidor, estas reglas deben replicarse en la configuración del sitio.
+
+Options -Indexes
+DirectoryIndex index.php
+
+<IfModule mod_headers.c>
+    # Las cabeceras de seguridad de las páginas dinámicas se envían desde
+    # includes/functions.php para poder incluir el nonce de la CSP.
+    Header always unset X-Powered-By
+    Header always unset Server
+</IfModule>
+
+# Refuerzo para recursos estáticos (no pasan por PHP).
+<FilesMatch "\.(css|js|svg|png|jpg|jpeg|gif|webp|woff2?|ttf|eot)$">
+    <IfModule mod_headers.c>
+        Header always set X-Content-Type-Options "nosniff"
+        Header always set X-Frame-Options "DENY"
+        Header always set Referrer-Policy "strict-origin-when-cross-origin"
+        Header always set Cross-Origin-Resource-Policy "same-origin"
+    </IfModule>
+</FilesMatch>
+
+# No exponer archivos ocultos ni respaldos/consultas sueltas.
+<FilesMatch "^\.">
+    Require all denied
+</FilesMatch>
+
+<FilesMatch "\.(sql|ini|log|bak|old|orig|env|lock|md|markdown)$">
+    Require all denied
+</FilesMatch>

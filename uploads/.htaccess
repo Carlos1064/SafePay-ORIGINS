@@ -1,0 +1,13 @@
+# Los PDFs de facturas solo se entregan mediante modules/facturas/pdf.php.
+# El acceso directo por URL queda denegado; el script PHP los lee del disco
+# después de comprobar sesión, rol y alcance.
+
+Options -Indexes
+
+<IfModule mod_authz_core.c>
+    Require all denied
+</IfModule>
+<IfModule !mod_authz_core.c>
+    Order allow,deny
+    Deny from all
+</IfModule>
